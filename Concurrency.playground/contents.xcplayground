@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <playground version='6.0' target-platform='ios' buildActiveScheme='true' importAppTypes='true'>
     <pages>
-        <page name='Example-1'/>
-        <page name='Example-2'/>
-        <page name='Example-3'/>
-        <page name='Example-4'/>
-        <page name='Example-5'/>
-        <page name='Example-6'/>
-        <page name='Example-7'/>
-        <page name='Example-8'/>
-        <page name='Example-9'/>
-        <page name='Example-10'/>
-        <page name='Example-11'/>
+        <page name='Ep-3_Example-1'/>
+        <page name='Ep-3_Example-2'/>
     </pages>
 </playground>
