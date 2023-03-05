@@ -10,16 +10,17 @@ public class Network {
     public func execute(urlString: String,
                          completion: @escaping (Result<String,Error>) -> Void) {
         let urlRequest = URLRequest(url: URL(string: urlString)!)
+        //print("Network-Sending request \(urlRequest)")
         URLSession.shared.dataTask(with: urlRequest) { data, response , error in
             if let error = error{
-                print("Error")
+                //print("Network-Error")
                 completion(.failure(error))
             }else if let data = data {
-                print("Data received")
+
                 let str = String(decoding: data, as: UTF8.self)
+                //print("Network-Data received, str: \(str)")
                 completion(.success(str))
             }
         }.resume()
     }
-
 }

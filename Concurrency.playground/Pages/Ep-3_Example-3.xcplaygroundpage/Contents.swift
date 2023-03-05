@@ -2,11 +2,9 @@ import UIKit
 import PlaygroundSupport
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-
-/// Ep-3 Example-2
-/// DispatchGroup with wait
+/// Ep-3 Example-3
+/// DispatchGroup with wait and timeout
 ///
-
 
 // 1. Sample URLs
 let urlNoDelay = "https://run.mocky.io/v3/bf4523b3-1f46-4fa2-a376-5374aadea7e6"
@@ -23,7 +21,7 @@ class MyViewController : UIViewController {
         // 4. Simple UI setup.
         let view = UIView()
         view.backgroundColor = .white
-        label.frame = CGRect(x: 150, y: 200, width: 200, height: 20)
+        label.frame = CGRect(x: 20, y: 200, width: 300, height: 20)
         label.text = "Starting to fetch...⏱"
         label.textColor = .black
         view.addSubview(label)
@@ -42,23 +40,36 @@ class MyViewController : UIViewController {
         self.midSpeedRequest()
         self.slowRequest()
         
-        // 8. Waiting the current dispatch queue
+
         print("Waiting the current dispatch queue ✋")
-        loadDataDispatchGroup.wait()
-        print("Continue to the execution 🤙")
-        
-        // 9. After execution completed update label in Main Queue.
-        DispatchQueue.main.async {
-            self.label.text = "Fetch completed 🎉"
+        // 8. Waiting the current dispatch queue with timeout value
+        let waitResult = loadDataDispatchGroup.wait(timeout: .now() + .seconds(3))
+       
+        // 9. Wait result block inform us either all executions are completed or timeout ocurred.
+        switch waitResult {
+        case .success:
+            // 10. All requests are completed in timeout period.
+            print("All of the requests are executed in given time 🤙")
+            DispatchQueue.main.async {
+                self.label.text = "All requests are completed 🎉"
+            }
+        case .timedOut:
+            // 11. Not all the requests are finished so far.
+            print("Exection completed with time out ⚠️")
+            DispatchQueue.main.async {
+                self.label.text = "Fetch partially completed 🎉"
+            }
+            
         }
+        
     }
     
     private func fastRequest() {
-        // 10. Increment the counter by enter function
+        // 12. Increment the counter by enter function
         loadDataDispatchGroup.enter()
         print("Fast request started")
         Network.shared.execute(urlString: urlNoDelay) { result in
-            // 11. Decrement the counter by leave function
+            // 13. Decrement the counter by leave function
             loadDataDispatchGroup.leave()
             switch result {
             case .success(_):
