@@ -9,11 +9,9 @@ let concurrentQueue = DispatchQueue(label: "aConcurrentQueue",
                                     attributes: .concurrent)
 
 serialQueue.async {
-    print("---- First loop start -----")
     for i in 0...5 {
-        print("Value is \(i)")
+        print("First loop, Value is \(i)")
     }
-    print("---- First loop end -----")
 }
 
 serialQueue.sync {

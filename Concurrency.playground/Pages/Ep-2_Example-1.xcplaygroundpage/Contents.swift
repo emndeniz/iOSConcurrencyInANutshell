@@ -9,48 +9,40 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 
 DispatchQueue.global(qos: .background).async {
     let qos = DispatchQoS.QoSClass(rawValue: qos_class_self()) ?? .unspecified
-    
-    print("---- First loop start ----- qos: \(qos)")
+
     for i in 0...5 {
-        print("Value is \(i)")
+        print("1️⃣ First loop, QoS: \(qos), Value is \(i)")
     }
-    print("---- First loop end -----")
 }
 
 
 DispatchQueue.global(qos: .utility).async {
     let qos = DispatchQoS.QoSClass(rawValue: qos_class_self()) ?? .unspecified
-    
-    print("---- Second loop start ----- qos: \(qos)")
+
     for i in 6...10 {
-        print("Value is \(i)")
+        print("2️⃣ Second loop, QoS: \(qos), Value is \(i)")
     }
-    print("---- Second loop end -----")
 }
 
 
 
 DispatchQueue.global(qos: .userInitiated).async {
     let qos = DispatchQoS.QoSClass(rawValue: qos_class_self()) ?? .unspecified
-    
-    print("---- Third loop start ----- qos: \(qos)")
+
     for i in 11...15 {
-        print("Value is \(i)")
+        print("3️⃣ Third loop, QoS: \(qos), Value is \(i)")
     }
-    print("---- Third loop end -----")
 }
 
 
 
 DispatchQueue.global(qos: .userInteractive).async {
     let qos = DispatchQoS.QoSClass(rawValue: qos_class_self()) ?? .unspecified
-    
-    print("---- Fourth loop start ----- qos: \(qos)")
-    for i in 16...20 {
-        print("Value is \(i)")
-    }
-    print("---- Fourth loop end -----")
-}
 
+    for i in 16...20 {
+        print("4️⃣ Fourth loop, QoS: \(qos), Value is \(i)")
+    }
+
+}
 
 
